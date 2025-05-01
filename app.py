@@ -16,26 +16,56 @@ def load_data():
     return df
 
 df = load_data()
-st.success("✅ Data loaded successfully!")
 
-# Sidebar
+
+# Sidebar 
 st.sidebar.header("🔍 Filter Options")
-selected_type = st.sidebar.multiselect("Place Type", options=df["Type"].unique(), default=df["Type"].unique())
-selected_district = st.sidebar.multiselect("District", options=df["District"].unique(), default=df["District"].unique())
-selected_grade = st.sidebar.multiselect("Grade", options=df["Grade"].dropna().unique(), default=df["Grade"].dropna().unique())
 
-user_email = st.sidebar.text_input("💌: Enter your email")
+selected_type = st.sidebar.selectbox("Place Type", [""] + sorted(df["Type"].dropna().unique()))
+selected_district = st.sidebar.selectbox("District", [""] + sorted(df["District"].dropna().unique()))
+selected_grade = st.sidebar.selectbox("Grade", [""] + sorted(df["Grade"].dropna().unique()))
 
 # Apply Filters
-filtered_df = df[
-    (df["Type"].isin(selected_type)) &
-    (df["District"].isin(selected_district)) &
-    (df["Grade"].isin(selected_grade))
-]
+filtered_df = df.copy()
+
+if selected_type:
+    filtered_df = filtered_df[filtered_df["Type"] == selected_type]
+
+if selected_district:
+    filtered_df = filtered_df[filtered_df["District"] == selected_district]
+
+if selected_grade:
+    filtered_df = filtered_df[filtered_df["Grade"] == selected_grade]
+
 
 # Main Title 
-st.title("🇱🇰 Sri Lanka Tourism Services Dashboard")
+st.title("Sri Lanka Tourism Services Dashboard")
 st.caption("Explore restaurants, hotels, travel agents & recreational services across districts in Sri Lanka.")
+
+# Summary Metrics 
+st.markdown("### 📊 Summary")
+col1, col2, col3 = st.columns(3)
+col1.metric("📍 Total Places", filtered_df.shape[0])
+col2.metric("🔖 Unique Types", df["Type"].nunique())
+col3.metric("📌 Districts Covered", df["District"].nunique())
+
+# Charts 
+st.markdown("### 📌 Distribution by Place Type")
+type_counts = filtered_df["Type"].value_counts().reset_index()
+type_counts.columns = ["Type", "Count"]
+fig_type = px.bar(type_counts, x="Type", y="Count", color="Type", title="Count by Place Type")
+st.plotly_chart(fig_type, use_container_width=True)
+
+
+st.markdown("### 🥧 Grade Distribution of Places")
+grade_counts = filtered_df["Grade"].value_counts().reset_index()
+grade_counts.columns = ["Grade", "Count"]
+fig_pie = px.pie(grade_counts,names="Grade",values="Count",title="Proportion of Grades Among Places",color_discrete_sequence=px.colors.qualitative.Set3)
+st.plotly_chart(fig_pie, use_container_width=True)
+
+# Data Table 
+with st.expander("📂 Show Filtered Raw Data"):
+    st.dataframe(filtered_df)
 
 
 
