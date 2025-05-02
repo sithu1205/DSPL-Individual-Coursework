@@ -25,6 +25,8 @@ selected_type = st.sidebar.selectbox("Place Type", [""] + sorted(df["Type"].drop
 selected_district = st.sidebar.selectbox("District", [""] + sorted(df["District"].dropna().unique()))
 selected_grade = st.sidebar.selectbox("Grade", [""] + sorted(df["Grade"].dropna().unique()))
 
+user_email = st.sidebar.text_input("💌 Optional: Enter your email")
+
 # Apply Filters
 filtered_df = df.copy()
 
