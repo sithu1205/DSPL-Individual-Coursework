@@ -3,6 +3,9 @@ import pandas as pd
 import time
 import plotly.express as px
 
+# Page Config 
+st.set_page_config(page_title="Sri Lanka Tourism Dashboard", page_icon="🌴")
+
 #  Show Balloons & Progress 
 st.balloons()
 
@@ -25,7 +28,10 @@ selected_type = st.sidebar.selectbox("Place Type", [""] + sorted(df["Type"].drop
 selected_district = st.sidebar.selectbox("District", [""] + sorted(df["District"].dropna().unique()))
 selected_grade = st.sidebar.selectbox("Grade", [""] + sorted(df["Grade"].dropna().unique()))
 
-user_email = st.sidebar.text_input("💌 Optional: Enter your email")
+user_email = st.sidebar.text_input("💌: Enter your email (optional)")
+
+if user_email:
+    st.success(f"Thanks for visiting, {user_email}! 🎉")
 
 # Apply Filters
 filtered_df = df.copy()
