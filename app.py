@@ -4,7 +4,7 @@ import time
 import plotly.express as px
 
 # Page Config 
-st.set_page_config(page_title="Sri Lanka Tourism Dashboard", page_icon="🌴")
+st.set_page_config(page_title="Sri Lanka Tourism Services Dashboard", page_icon="🌴")
 
 #  Show Balloons & Progress 
 st.balloons()
