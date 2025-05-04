@@ -48,7 +48,7 @@ if selected_grade:
 
 # Main Title 
 st.title("Sri Lanka Tourism Services Dashboard")
-st.caption("Explore restaurants, hotels, travel agents & recreational services across districts in Sri Lanka.")
+st.caption("Explore restaurants, travel agents & recreational services across districts in Sri Lanka.")
 
 # Summary Metrics 
 st.markdown("### 📊 Summary")
