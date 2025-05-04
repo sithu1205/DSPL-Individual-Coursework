@@ -15,7 +15,7 @@ with st.spinner("Loading data..."):
 # Load Data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("D:\Streamlit\DSPL-Individual-Coursework\cleaned_Places for Travel-Dining-Recreational activities and Information of travel agents.csv")
+    df = pd.read_csv("DSPL-Individual-Coursework\cleaned_Places for Travel-Dining-Recreational activities and Information of travel agents.csv")
     return df
 
 df = load_data()
