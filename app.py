@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import time
 import plotly.express as px
+import os
 
 # Page Config 
 st.set_page_config(page_title="Sri Lanka Tourism Services Dashboard", page_icon="🌴")
@@ -12,10 +13,14 @@ st.balloons()
 with st.spinner("Loading data..."):
     time.sleep(1)
 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, 'cleaned_Places for Travel-Dining-Recreational activities and Information of travel agents.csv')
+df = pd.read_csv(file_path)
+
 # Load Data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("DSPL-Individual-Coursework\cleaned_Places for Travel-Dining-Recreational activities and Information of travel agents.csv")
+    df = pd.read_csv(file_path)
     return df
 
 df = load_data()
@@ -76,4 +81,8 @@ with st.expander("📂 Show Filtered Raw Data"):
     st.dataframe(filtered_df)
 
 
+
+#Footer
+st.markdown("---")
+st.caption("Developed for Data Science Project Lifecycle module | University of Westminster")
 
