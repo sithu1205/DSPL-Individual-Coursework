@@ -63,7 +63,7 @@ col2.metric("🔖 Unique Types", df["Type"].nunique())
 col3.metric("📌 Districts Covered", df["District"].nunique())
 
 # Charts 
-st.markdown("### 📌 Distribution by Place Type")
+st.markdown("### 📌 Distribution of Place Type")
 type_counts = filtered_df["Type"].value_counts().reset_index()
 type_counts.columns = ["Type", "Count"]
 fig_type = px.bar(type_counts, x="Type", y="Count", color="Type", title="Count by Place Type")
@@ -75,6 +75,12 @@ grade_counts = filtered_df["Grade"].value_counts().reset_index()
 grade_counts.columns = ["Grade", "Count"]
 fig_pie = px.pie(grade_counts,names="Grade",values="Count",title="Proportion of Grades Among Places",color_discrete_sequence=px.colors.qualitative.Set3)
 st.plotly_chart(fig_pie, use_container_width=True)
+
+st.markdown("### 📈 Grade Distribution as per District")
+grade_trend = filtered_df.groupby(['District', 'Grade']).size().reset_index(name='Count')
+fig_line = px.line(grade_trend, x="District", y="Count", color="Grade", markers=True, title="Grade Distribution by District")
+st.plotly_chart(fig_line, use_container_width=True)
+
 
 # Data Table 
 with st.expander("📂 Show Filtered Raw Data"):
