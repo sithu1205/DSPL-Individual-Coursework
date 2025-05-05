@@ -27,3 +27,19 @@ The dataset includes:
 - Grade (A/B/Not Graded)
 - AGA Division
 - PS/MC/UC
+
+---
+## 🚀 Features
+
+-  Summary metrics: total places, unique types, districts covered.
+-  Bar chart: distribution of place type.
+-  Pie chart: grade distribution.
+-  Line chart : Grade distribution as per districts
+-  Expandable data table with filtering and search.
+-  Sidebar filters for Place Type, District, and Grade.
+-  Optional email input for personalized interaction.
+-  Downloadable charts and data.
+-  Advanced options: full-screen mode, zoom/pan/reset for charts.
+
+---
+📺 Live App: https://sri-lanka-tourism-services-dashboard.streamlit.app/
